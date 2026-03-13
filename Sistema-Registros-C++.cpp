@@ -1,5 +1,5 @@
 /*
- *  SISTEMA DE GESTIÓN DE EMPLEADOS
+ *  SISTEMA DE GESTIÃ“N DE EMPLEADOS
  */
 
 #include <iostream>
@@ -8,14 +8,11 @@
 #include <iomanip>
 using namespace std;
 
-
-
-// CLASE Empleado: Contiene los datos de un empleado y sus propios metodos
-
+//CLASE Empleado: Contiene los datos de un empleado y sus propios metodos
 class Empleado {
 
 private:
-    // Atributos privados: solo se acceden desde dentro de la clase
+    //Atributos privados: solo se acceden desde dentro de la clase
     int id;
     string nombre;
     string departamento;
@@ -25,8 +22,8 @@ private:
     string estado;
 
 public:
-    // --- Constructor ---
-    // Permite crear un empleado pasando todos sus datos de una vez
+    //Constructor
+    //Permite crear un empleado pasando todos sus datos de una vez
     Empleado(int id, string nombre, string departamento, string cargo,
              double salario, int experiencia, string estado) {
         this->id           = id;
@@ -38,8 +35,8 @@ public:
         this->estado       = estado;
     }
 
-    // --- Getters ---
-    // Métodos para leer los atributos desde fuera de la clase
+    //Getters
+    //Metodos para leer los atributos desde fuera de la clase
     int    getId()           { return id; }
     string getNombre()       { return nombre; }
     string getDepartamento() { return departamento; }
@@ -48,8 +45,8 @@ public:
     int    getExperiencia()  { return experiencia; }
     string getEstado()       { return estado; }
 
-    // --- Setters ---
-    // Métodos para modificar los atributos desde fuera de la clase
+    //Setters
+    //MÃ©todos para modificar los atributos desde fuera de la clase
     void setNombre(string n)       { nombre = n; }
     void setDepartamento(string d) { departamento = d; }
     void setCargo(string c)        { cargo = c; }
@@ -57,7 +54,7 @@ public:
     void setExperiencia(int e)     { experiencia = e; }
     void setEstado(string e)       { estado = e; }
 
-    // --- mostrarDatos() ---
+    // Funcion mostrarDatos()
     // Imprime una fila con los datos del empleado en formato tabla
     void mostrarDatos() {
         cout << fixed << setprecision(2);
@@ -71,8 +68,8 @@ public:
              << estado << endl;
     }
 
-    // --- modificarDatos() ---
-    // Pregunta qué campo cambiar y aplica el cambio
+    //FunciÃ³n modificarDatos()
+    // Pregunta que campo cambiar y aplica el cambio
     void modificarDatos() {
         cout << "Empleado: " << nombre << endl;
         cout << "Que campo quiere modificar?" << endl;
@@ -110,14 +107,13 @@ public:
 
 
 // CLASE GestionEmpleados: Contiene el vector de empleados y todas las operaciones
-
 class GestionEmpleados {
 
 private:
     // El vector que guarda todos los empleados
     vector<Empleado> lista;
 
-    // Busca un empleado por ID y devuelve su posición en el vector
+    // Busca un empleado por ID y devuelve su posiciÃ³n en el vector
     // Devuelve -1 si no lo encuentra
     int buscarPorId(int id) {
         for (int i = 0; i < lista.size(); i++) {
@@ -140,7 +136,7 @@ private:
     }
 
 public:
-    // cargarDatos()
+    //FunciÃ³n cargarDatos()
     // Agrega los 10 empleados de prueba al iniciar el programa
     void cargarDatos() {
         lista.push_back(Empleado(1,  "Ana Torres",     "Recursos Humanos", "Gerente de RRHH",    2800, 8,  "Activo"));
@@ -155,10 +151,10 @@ public:
         lista.push_back(Empleado(10, "Javier Molina",   "Contabilidad",     "Auxiliar Contable",  1600, 1,  "Inactivo"));
     }
 
-    // agregarEmpleado()
-    // Opción 1: pide los datos al usuario y agrega un nuevo empleado
+    //agregarEmpleado()
+    //OpciÃ³n 1: pide los datos al usuario y agrega un nuevo empleado
     void agregarEmpleado() {
-        // el ID se calcula automáticamente segun el mayor existente
+        // el ID se calcula automÃ¡ticamente segun el mayor existente
         int maxId = 0;
         for (int i = 0; i < lista.size(); i++) {
             if (lista[i].getId() > maxId)
@@ -186,13 +182,13 @@ public:
         cin.ignore();
         estado = "Activo";
 
-        // se crea el objeto y se agrega al vector
+        //se crea el objeto y se agrega al vector
         lista.push_back(Empleado(nuevoId, nombre, departamento, cargo, salario, experiencia, estado));
         cout << "Empleado agregado correctamente." << endl;
     }
 
-    // mostrarEmpleados())
-    // Opción 2: muestra todos los empleados en una tabla
+    //FunciÃ³n mostrarEmpleados())
+    //OpciÃ³n 2: muestra todos los empleados en una tabla
     void mostrarEmpleados() {
         if (lista.size() == 0) {
             cout << "No hay empleados registrados." << endl;
@@ -207,8 +203,8 @@ public:
         }
     }
 
-    // buscarEmpleado()
-    // Opción 3: busca por ID, nombre o departamento
+    //FunciÃ³n buscarEmpleado()
+    //OpciÃ³n 3: busca por ID, nombre o departamento
     void buscarEmpleado() {
         cout << "\nBuscar por: 1) ID   2) Nombre   3) Departamento" << endl;
         cout << "Opcion: ";
@@ -264,8 +260,8 @@ public:
             cout << "No se encontraron resultados." << endl;
     }
 
-    // modificarEmpleado() 
-    // Opción 4: busca por ID y llama al método modificarDatos() del empleado
+    //FunciÃ³n modificarEmpleado() 
+    // OpciÃ³n 4: busca por ID y llama al mÃ©todo modificarDatos() del empleado
     void modificarEmpleado() {
         cout << "\nIngrese el ID del empleado a modificar: ";
         int id;
@@ -278,13 +274,13 @@ public:
             return;
         }
 
-        // se delega la modificación al propio objeto Empleado
+        // se delega la modificaciÃ³n al propio objeto Empleado
         lista[pos].modificarDatos();
         cout << "Registro modificado." << endl;
     }
 
-    // eliminarEmpleado()
-    // Opción 5: pide confirmación y elimina el empleado del vector
+    //FunciÃ³n eliminarEmpleado()
+    // OpciÃ³n 5: pide confirmaciÃ³n y elimina el empleado del vector
     void eliminarEmpleado() {
         cout << "\nIngrese el ID del empleado a eliminar: ";
         int id;
@@ -310,8 +306,8 @@ public:
         }
     }
 
-    // generarReporte()
-    // Opción 6: muestra estadísticas generales del sistema
+    //FunciÃ³n generarReporte()
+    // OpciÃ³n 6: muestra estadisticas generales del sistema
     void generarReporte() {
         if (lista.size() == 0) {
             cout << "No hay datos." << endl;
@@ -350,7 +346,7 @@ public:
         cout << "Salario mas alto   : $" << mayor << " (" << nombreMayor << ")" << endl;
         cout << "Salario mas bajo   : $" << menor << endl;
 
-        // contar cuántos empleados hay por departamento
+        // contar cuÃ¡ntos empleados hay por departamento
         cout << "\nEmpleados por departamento:" << endl;
         vector<string> deptos;
         for (int i = 0; i < lista.size(); i++) {
@@ -372,8 +368,8 @@ public:
         }
     }
 
-    // mostrarMenu()
-    // Imprime las opciones del menú principal
+    //FunciÃ³n mostrarMenu()
+    // Imprime las opciones del menÃº principal
     void mostrarMenu() {
         cout << "\n--- MENU ---" << endl;
         cout << "1. Registrar empleado" << endl;
@@ -387,7 +383,7 @@ public:
 };
 
 
-// FUNCIÓN PRINCIPAL: Solo crea el objeto GestionEmpleados y maneja el menú
+// Main: crea el objeto GestionEmpleados y maneja el menÃº
 
 int main() {
     GestionEmpleados sistema;
